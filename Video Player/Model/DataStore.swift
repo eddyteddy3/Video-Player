@@ -6,4 +6,21 @@
 //  Copyright © 2020 Moazzam Tahir. All rights reserved.
 //
 
-import Foundation
+import SwiftUI
+import Combine
+
+class DataStore: ObservableObject {
+    @Published var videos: [Post] = []
+    
+    init() {
+        getPosts()
+    }
+    
+    func getPosts() {
+        //
+        ApiCall.init().getData { (videos) in
+            self.videos = videos
+        }
+        
+    }
+}
