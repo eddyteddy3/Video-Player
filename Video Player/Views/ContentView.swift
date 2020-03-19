@@ -13,7 +13,10 @@ struct ContentView: View {
     
     var body: some View {
         List(store.videos) { video in
-            Text("\(video.name)")
+            VStack(alignment: .leading, spacing: 10) {
+                Text(video.name).bold()
+                Text("\(video.video_link)")
+            }
         }
     }
 }
