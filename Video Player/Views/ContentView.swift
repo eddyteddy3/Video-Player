@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         List(videos) { video in
-            Text("Hello, World!")
+            Text("\(video.name)")
             
         }.onAppear {
             ApiCall.init().getData { (videos) in
