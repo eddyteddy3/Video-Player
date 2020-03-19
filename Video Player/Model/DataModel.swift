@@ -16,4 +16,9 @@ struct Post: Codable, Identifiable {
     var video_link: String
 }
 
+//the need for this data struct was to iterate through the nested JSON.
+struct Video: Codable {
+    var videos: [Post]
+}
+
 

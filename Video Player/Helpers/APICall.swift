@@ -15,7 +15,7 @@ class ApiCall {
         
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             if let data = data {
-                let posts = try! JSONDecoder.init().decode([Post].self, from: data)
+                let posts = try! JSONDecoder.init().decode(Video.self, from: data)
                 
                 print(posts)
             }
