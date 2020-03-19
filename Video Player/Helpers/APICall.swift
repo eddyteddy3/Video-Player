@@ -10,14 +10,17 @@ import Foundation
 
 class ApiCall {
     
-    func getData() {
+    func getData(completion: @escaping ([Post]) -> ()) {
         guard let url = URL(string: "https://iphonephotographyschool.com/test-api/videos") else {return}
         
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             if let data = data {
-                let posts = try! JSONDecoder.init().decode(Video.self, from: data)
+                let videos = try! JSONDecoder.init().decode(Video.self, from: data)
                 
-                print(posts)
+                DispatchQueue.main.async {
+                    completion(videos.self.videos)
+                }
+                
             }
         }.resume()
         

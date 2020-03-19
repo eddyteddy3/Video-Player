@@ -9,11 +9,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var videos: [Post] = []
+    
     var body: some View {
-        Text("Hello, World!")
-            .onAppear {
-                ApiCall.init().getData()
+        List(videos) { video in
+            Text("Hello, World!")
+            
+        }.onAppear {
+            ApiCall.init().getData { (videos) in
+                self.videos = videos
+            }
         }
+        
     }
 }
 

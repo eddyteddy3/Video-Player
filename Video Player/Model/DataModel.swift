@@ -17,7 +17,9 @@ struct Post: Codable, Identifiable {
 }
 
 //the need for this data struct was to iterate through the nested JSON.
+//conforming to identifiable to show it in a list. 
 struct Video: Codable {
+    //let id = UUID()
     var videos: [Post]
 }
 
