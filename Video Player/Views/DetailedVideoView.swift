@@ -27,6 +27,7 @@ class PlayerUIView: UIView {
     
     init(player: AVPlayer) {
         super.init(frame: .zero)
+        player.play()
         
         playerLayer.player = player
         layer.addSublayer(playerLayer)
@@ -49,39 +50,33 @@ struct DetailedVideoView: View {
     @State var isShowing = false
     
     var imageURL = ""
-    var player: AVPlayer
-    
-    
-    init(player: AVPlayer) {
-        self.player = player
-    }
+    var videoURL = ""
     
     var body: some View {
-        VStack {
+        let player = AVPlayer(url: URL(string: videoURL)!)
+        
+        return VStack {
             ZStack {
-                WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
+                
+                if !isShowing {
+                    
+                    WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
                     .resizable()
                     .frame(width: 400, height: 300)
                     .cornerRadius(10)
-                
-//                Button("") {
-//                    self.isShowing.toggle()
-//                }.overlay(Image(systemName: "play.circle").imageScale(.large)).sheet(isPresented: $isShowing) {
-//                    PlayerView()
-//                }
+                } else {
+                    PlayerView(player: player)
+                }
                 
                 Button(action: {
-                    //self.isShowing.toggle()
-                    PlayerView()
+                    self.isShowing.toggle()
+                    
                 }) {
                     Image(systemName: "play.circle")
-                    //sheet(isPresented: $isShowing) {
-                     //   PlayerView()
-                    //}
                 }
             }
             //.padding(.top)
-                
+            
             
             Text(videoName)
                 .font(.system(size: 30, weight: .semibold, design: .rounded))
@@ -100,13 +95,6 @@ struct DetailedVideoView: View {
             
             
         }
-    }
-    
-    func playVideo(url: String) {
-        guard let url = URL(string: url) else {return}
-        let player = AVPlayer(url: url)
-        
-        playerVC.player = player
     }
 }
 
