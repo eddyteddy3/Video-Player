@@ -8,31 +8,70 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import AVKit
+
+struct PlayerView: UIViewRepresentable {
+    
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PlayerView>) {
+        
+    }
+    
+    func makeUIView(context: Context) -> UIView {
+        return PlayerUIView(frame: .zero)
+    }
+    
+}
+
+class PlayerUIView: UIView {
+    let playerLayer = AVPlayerLayer()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        guard let url = URL(string: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8") else {return}
+        
+        let player = AVPlayer(url: url)
+        
+        playerLayer.player = player
+        layer.addSublayer(playerLayer)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        playerLayer.frame = bounds
+    }
+}
 
 struct DetailedVideoView: View {
     @State var videoName = "This is video name for"
     @State var description = "This description is for a very very long text"
+    var imageURL = ""
     
     var body: some View {
         VStack {
-            WebImage(url: URL(string: "https://i.picsum.photos/id/477/2000/2000.jpg")).resizable(capInsets: .init(), resizingMode: .stretch)
+            WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
                 //.resizable()
                 .frame(width: 400, height: 300)
                 .cornerRadius(10)
-                .padding(.top)
+            //.padding(.top)
             
             Text(videoName)
                 .font(.system(size: 30, weight: .semibold, design: .rounded))
                 .multilineTextAlignment(.center)
                 .padding(.top)
-                .padding(.leading, 40)
-                .padding(.trailing, 40)
+                .padding(.leading, 25)
+                .padding(.trailing, 25)
             
             Text(description)
                 .font(.body)
                 .fontWeight(.medium)
-                .padding(.top)
-                
+                .padding(10)
+            
             
             Spacer()
             

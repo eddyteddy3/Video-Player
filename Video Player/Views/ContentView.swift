@@ -15,19 +15,24 @@ struct ContentView: View {
     //@ObservedObject var image1: ImageStore
     
     var body: some View {
-        List(store.videos) { video in
-             HStack(spacing: 5) {
-                WebImage(url: URL(string: video.thumbnail))
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(5)
-                //Image(uiImage: self.getVideo(url: video.thumbnail))
-                  //  .resizable()
-                    //.frame(width: 20, height: 20)
-                
-                
-                Text(video.name).bold()
+        NavigationView {
+            List(store.videos) { video in
+                NavigationLink(destination: DetailedVideoView(videoName: video.name, description: video.description, imageURL: video.thumbnail)) {
+                    HStack(spacing: 5) {
+                        WebImage(url: URL(string: video.thumbnail))
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .cornerRadius(5)
+                        //Image(uiImage: self.getVideo(url: video.thumbnail))
+                          //  .resizable()
+                            //.frame(width: 20, height: 20)
+                        
+                        
+                        Text(video.name).bold()
+                    }
+                }
             }
+        .navigationBarTitle("Videos")
         }
     }
     
