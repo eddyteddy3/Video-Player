@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,6 +16,7 @@
 		033CA9A12423F94300FD0D18 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9A02423F94300FD0D18 /* DataModel.swift */; };
 		033CA9A42423FA5100FD0D18 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9A32423FA5100FD0D18 /* APICall.swift */; };
 		033CA9A624241D9A00FD0D18 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9A524241D9A00FD0D18 /* DataStore.swift */; };
+		033CA9AE2424E15D00FD0D18 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 033CA9AD2424E15D00FD0D18 /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				033CA9AE2424E15D00FD0D18 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +142,9 @@
 			dependencies = (
 			);
 			name = "Video Player";
+			packageProductDependencies = (
+				033CA9AD2424E15D00FD0D18 /* SDWebImageSwiftUI */,
+			);
 			productName = "Video Player";
 			productReference = 033CA9822423F69D00FD0D18 /* Video Player.app */;
 			productType = "com.apple.product-type.application";
@@ -168,6 +173,9 @@
 				Base,
 			);
 			mainGroup = 033CA9792423F69D00FD0D18;
+			packageReferences = (
+				033CA9AC2424E15D00FD0D18 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = 033CA9832423F69D00FD0D18 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -394,6 +402,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		033CA9AC2424E15D00FD0D18 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		033CA9AD2424E15D00FD0D18 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 033CA9AC2424E15D00FD0D18 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 033CA97A2423F69D00FD0D18 /* Project object */;
 }
