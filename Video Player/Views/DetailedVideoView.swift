@@ -59,11 +59,13 @@ struct DetailedVideoView: View {
             ZStack {
                 
                 if !isShowing {
-                    
                     WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
                     .resizable()
                     .frame(width: 400, height: 300)
                     .cornerRadius(10)
+                    .onAppear() {
+                        player.pause()
+                    }
                 } else {
                     PlayerView(player: player)
                 }
@@ -95,6 +97,15 @@ struct DetailedVideoView: View {
             
             
         }
+        
+        .navigationBarItems(trailing: Button(action: {
+            
+        }, label: {
+            HStack {
+                Text("Download Video")
+                Image(systemName: "square.and.arrow.down")
+            }
+        }))
     }
 }
 
