@@ -11,28 +11,22 @@ import SDWebImageSwiftUI
 import AVKit
 
 struct PlayerView: UIViewRepresentable {
+    let player: AVPlayer
     
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PlayerView>) {
         
     }
     
     func makeUIView(context: Context) -> UIView {
-        return PlayerUIView(frame: .zero)
+        return PlayerUIView(player: player)
     }
-    
 }
 
 class PlayerUIView: UIView {
     let playerLayer = AVPlayerLayer()
-    var videoURL = ""
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        guard let url = URL(string: videoURL) else {return}
-        
-        let player = AVPlayer(url: url)
-        player.play()
+    init(player: AVPlayer) {
+        super.init(frame: .zero)
         
         playerLayer.player = player
         layer.addSublayer(playerLayer)
@@ -52,8 +46,15 @@ class PlayerUIView: UIView {
 struct DetailedVideoView: View {
     @State var videoName = "This is video name for"
     @State var description = "This description is for a very very long text"
-    var imageURL = ""
+    @State var isShowing = false
     
+    var imageURL = ""
+    var player: AVPlayer
+    
+    
+    init(player: AVPlayer) {
+        self.player = player
+    }
     
     var body: some View {
         VStack {
@@ -63,9 +64,21 @@ struct DetailedVideoView: View {
                     .frame(width: 400, height: 300)
                     .cornerRadius(10)
                 
-                Button("") {
-                    
-                }.overlay(Image(systemName: "play.circle").imageScale(.large))
+//                Button("") {
+//                    self.isShowing.toggle()
+//                }.overlay(Image(systemName: "play.circle").imageScale(.large)).sheet(isPresented: $isShowing) {
+//                    PlayerView()
+//                }
+                
+                Button(action: {
+                    //self.isShowing.toggle()
+                    PlayerView()
+                }) {
+                    Image(systemName: "play.circle")
+                    //sheet(isPresented: $isShowing) {
+                     //   PlayerView()
+                    //}
+                }
             }
             //.padding(.top)
                 
@@ -87,6 +100,13 @@ struct DetailedVideoView: View {
             
             
         }
+    }
+    
+    func playVideo(url: String) {
+        guard let url = URL(string: url) else {return}
+        let player = AVPlayer(url: url)
+        
+        playerVC.player = player
     }
 }
 

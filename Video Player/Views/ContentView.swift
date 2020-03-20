@@ -9,7 +9,6 @@
 import SwiftUI
 import UIKit
 import SDWebImageSwiftUI
-import AVKit
 
 struct ContentView: View {
     @ObservedObject var store = DataStore()
