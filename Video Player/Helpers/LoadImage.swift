@@ -7,9 +7,9 @@
 //
 import Foundation
 import UIKit
-import Combine
+//import Combine
 
-class LoadImage: ObservableObject {
+class LoadImage {
     var image = UIImage()
     
     func getImage(imageLink url: String, completionHandler: @escaping (UIImage) -> ()) {
@@ -22,11 +22,12 @@ class LoadImage: ObservableObject {
                 guard let image = UIImage(data: data) else {return}
                 print("DATA: \(image.size)")
                 
+                //self.image = image
                 DispatchQueue.main.async {
                     completionHandler(image)
                 }
             }
-        
+            
         }.resume()
     }
 }

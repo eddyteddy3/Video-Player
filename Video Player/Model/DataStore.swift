@@ -29,13 +29,11 @@ class ImageStore: ObservableObject {
     @Published var image = UIImage()
     
     init(url: String) {
-        getImage(url: url)
+        
     }
     
     func getImage(url: String) {
-        LoadImage().getImage(imageLink: url) { (image) in
-            self.image = image
-        }
+        
     }
 }
 

@@ -10,31 +10,36 @@ import SwiftUI
 import UIKit
 import SDWebImageSwiftUI
 
-struct ImageCustom {
-    var imageURL: String
-    
-    func loadImage() {
-       //LoadImage().getImage(imageLink: imageURL)
-    }
-}
-
 struct ContentView: View {
     @ObservedObject var store = DataStore()
     //@ObservedObject var image1: ImageStore
     
     var body: some View {
         List(store.videos) { video in
-        //image1 = ImageStore(url: video.thumbnail)
-        
-             HStack(spacing: 10) {
+             HStack(spacing: 5) {
                 WebImage(url: URL(string: video.thumbnail))
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(5)
+                //Image(uiImage: self.getVideo(url: video.thumbnail))
+                  //  .resizable()
+                    //.frame(width: 20, height: 20)
+                
                 
                 Text(video.name).bold()
             }
         }
     }
+    
+//    func getVideo(url: String) -> UIImage {
+//        let image1 = LoadImage()
+//        image1.getImage(imageLink: url) { (image) in
+//            image1.image = image
+//            print(image1.image.size)
+//        }
+//        print("Out of completionHandler: \(image1.image.size)")
+//        return image1.image
+//    }
 }
 
 struct ContentView_Previews: PreviewProvider {
