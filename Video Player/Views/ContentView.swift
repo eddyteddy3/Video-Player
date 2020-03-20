@@ -9,10 +9,11 @@
 import SwiftUI
 import UIKit
 import SDWebImageSwiftUI
+import AVKit
 
 struct ContentView: View {
     @ObservedObject var store = DataStore()
-    //@ObservedObject var image1: ImageStore
+    //@ObservedObjecasdasdt var image1: ImageStore
     
     var body: some View {
         NavigationView {

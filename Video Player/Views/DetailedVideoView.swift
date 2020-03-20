@@ -24,13 +24,15 @@ struct PlayerView: UIViewRepresentable {
 
 class PlayerUIView: UIView {
     let playerLayer = AVPlayerLayer()
+    var videoURL = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        guard let url = URL(string: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8") else {return}
+        guard let url = URL(string: videoURL) else {return}
         
         let player = AVPlayer(url: url)
+        player.play()
         
         playerLayer.player = player
         layer.addSublayer(playerLayer)
@@ -52,13 +54,21 @@ struct DetailedVideoView: View {
     @State var description = "This description is for a very very long text"
     var imageURL = ""
     
+    
     var body: some View {
         VStack {
-            WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
-                //.resizable()
-                .frame(width: 400, height: 300)
-                .cornerRadius(10)
+            ZStack {
+                WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
+                    .resizable()
+                    .frame(width: 400, height: 300)
+                    .cornerRadius(10)
+                
+                Button("") {
+                    
+                }.overlay(Image(systemName: "play.circle").imageScale(.large))
+            }
             //.padding(.top)
+                
             
             Text(videoName)
                 .font(.system(size: 30, weight: .semibold, design: .rounded))
