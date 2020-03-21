@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 import AVKit
 
 struct PlayerView: UIViewControllerRepresentable {
@@ -44,22 +43,10 @@ struct DetailedVideoView: View {
             ZStack {
                 
                 if !isShowing {
-                    /*WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
-                     .resizable()
-                     .frame(width: 400, height: 300)
-                     .cornerRadius(10)
-                     .onAppear() {
-                     player.pause()
-                     }*/
                     
                     ImageView(imageUrl: imageURL, height: 400, width: 300)
                         .frame(width: 400, height: 300, alignment: .center)
                         .cornerRadius(10)
-                        .onAppear() {
-                            if self.isShowing {
-                                player.pause()
-                            }
-                    }
                     
                 } else {
                     PlayerView(player: player)
