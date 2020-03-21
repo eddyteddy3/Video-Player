@@ -19,7 +19,10 @@ struct ImageView: View {
     var body: some View {
         Image(uiImage: image.image ?? ImageView.placeholderImage!)
         .resizable()
-        .frame(width: 40, height: 40)
+        .scaledToFit()
+        .frame(width: 50, height: 50)
+        .cornerRadius(5)
+        .padding(5)
     }
     
     
@@ -27,6 +30,6 @@ struct ImageView: View {
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageView(imageUrl: nil)
+        ImageView(imageUrl: "")
     }
 }

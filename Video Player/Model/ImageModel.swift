@@ -28,6 +28,6 @@ class ImageLoader: ObservableObject {
                     self.image = image
                 }
             }
-        }
+        }.resume()
     }
 }
