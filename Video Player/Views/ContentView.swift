@@ -18,8 +18,9 @@ struct ContentView: View {
             List(store.videos) { video in
                 NavigationLink(destination: DetailedVideoView(videoName: video.name, description: video.description, imageURL: video.thumbnail, videoURL: video.video_link)) {
                     HStack(spacing: 5) {
-                        ImageView(imageUrl: video.thumbnail)
-                        
+                        ImageView(imageUrl: video.thumbnail, height: 40, width: 40)
+                            .frame(width: 40, height: 40)
+                            .cornerRadius(5)
                         Text(video.name).bold()
                     }
                 }

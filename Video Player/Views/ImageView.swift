@@ -10,26 +10,25 @@ import SwiftUI
 
 struct ImageView: View {
     @ObservedObject var image: ImageLoader
+    var height: CGFloat
+    var width: CGFloat
     static var placeholderImage = UIImage.init(systemName: "exclamationmark.icloud.fill")
     
-    init(imageUrl: String) {
+    init(imageUrl: String, height: CGFloat, width: CGFloat) {
         image = ImageLoader(url: imageUrl)
+        self.width = width
+        self.height = height
     }
     
     var body: some View {
         Image(uiImage: image.image ?? ImageView.placeholderImage!)
         .resizable()
-        .scaledToFit()
-        .frame(width: 50, height: 50)
-        .cornerRadius(5)
-        .padding(5)
+        .scaledToFill()
     }
-    
-    
 }
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageView(imageUrl: "")
+        ImageView(imageUrl: "", height: 0, width: 0)
     }
 }

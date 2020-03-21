@@ -44,13 +44,23 @@ struct DetailedVideoView: View {
             ZStack {
                 
                 if !isShowing {
-                    WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
-                        .resizable()
-                        .frame(width: 400, height: 300)
+                    /*WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
+                     .resizable()
+                     .frame(width: 400, height: 300)
+                     .cornerRadius(10)
+                     .onAppear() {
+                     player.pause()
+                     }*/
+                    
+                    ImageView(imageUrl: imageURL, height: 400, width: 300)
+                        .frame(width: 400, height: 300, alignment: .center)
                         .cornerRadius(10)
                         .onAppear() {
-                            player.pause()
+                            if self.isShowing {
+                                player.pause()
+                            }
                     }
+                    
                 } else {
                     PlayerView(player: player)
                         .frame(width: 400, height: 300)
@@ -61,7 +71,10 @@ struct DetailedVideoView: View {
                     self.isShowing.toggle()
                     player.play()
                 }) {
-                    Image(systemName: isShowing ? "" : "play.circle").accentColor(Color.black)
+                    Image(systemName: isShowing ? "" : "play.circle")
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                        .accentColor(Color.black)
                 }
                 
             }
@@ -85,14 +98,14 @@ struct DetailedVideoView: View {
             player.pause()
         })
             
-        .navigationBarItems(trailing: Button(action: {
-            //download video
-        }, label: {
-            HStack {
-                Text("Download Video")
-                Image(systemName: "square.and.arrow.down")
-            }
-        }))
+            .navigationBarItems(trailing: Button(action: {
+                //download video
+            }, label: {
+                HStack {
+                    Text("Download Video")
+                    Image(systemName: "square.and.arrow.down")
+                }
+            }))
     }
 }
 
