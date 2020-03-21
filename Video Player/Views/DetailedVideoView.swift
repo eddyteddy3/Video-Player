@@ -11,7 +11,6 @@ import SDWebImageSwiftUI
 import AVKit
 
 struct PlayerView: UIViewControllerRepresentable {
-    
     var player: AVPlayer
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<PlayerView>) -> AVPlayerViewController {
@@ -20,55 +19,13 @@ struct PlayerView: UIViewControllerRepresentable {
         let player1 = player
         
         playerVC.player = player1
+        player1.play()
         
         return playerVC
     }
     
     func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<PlayerView>) {
         
-    }
-}
-
-struct PlayerContainer: View {
-    let player: AVPlayer
-    @State var isPlaying = true
-    
-    var body: some View {
-        ZStack {
-            PlayerView(player: player)
-            Button(action: {
-                self.isPlaying.toggle()
-                if self.isPlaying {
-                    self.player.pause()
-                } else {
-                    self.player.play()
-                }
-            }) {
-                Image(systemName: "play.circle")
-            }
-        }
-    }
-}
-
-class PlayerUIView: UIView {
-    let playerLayer = AVPlayerLayer()
-    
-    init(player: AVPlayer) {
-        super.init(frame: .zero)
-        //player.play()
-        
-        playerLayer.player = player
-        layer.addSublayer(playerLayer)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        playerLayer.frame = bounds
     }
 }
 
@@ -88,25 +45,26 @@ struct DetailedVideoView: View {
                 
                 if !isShowing {
                     WebImage(url: URL(string: imageURL)).resizable(capInsets: .init(), resizingMode: .stretch)
-                    .resizable()
-                    .frame(width: 400, height: 300)
-                    .cornerRadius(10)
-                    .onAppear() {
-                        player.pause()
+                        .resizable()
+                        .frame(width: 400, height: 300)
+                        .cornerRadius(10)
+                        .onAppear() {
+                            player.pause()
                     }
                 } else {
                     PlayerView(player: player)
+                        .frame(width: 400, height: 300)
+                        .cornerRadius(10)
                 }
                 
                 Button(action: {
                     self.isShowing.toggle()
+                    player.play()
                 }) {
-                    Image(systemName: isShowing ? "play.circle" : "").accentColor(Color.black)
+                    Image(systemName: isShowing ? "" : "play.circle").accentColor(Color.black)
                 }
                 
             }
-            //.padding(.top)
-            
             
             Text(videoName)
                 .font(.system(size: 30, weight: .semibold, design: .rounded))
@@ -122,10 +80,11 @@ struct DetailedVideoView: View {
             
             
             Spacer()
-            
-            
         }
-        
+        .onDisappear(perform: {
+            player.pause()
+        })
+            
         .navigationBarItems(trailing: Button(action: {
             //download video
         }, label: {
