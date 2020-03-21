@@ -41,13 +41,10 @@ struct DetailedVideoView: View {
         
         return VStack {
             ZStack {
-                
                 if !isShowing {
-                    
-                    ImageView(imageUrl: imageURL, height: 400, width: 300)
+                    ImageView(imageUrl: imageURL)
                         .frame(width: 400, height: 300, alignment: .center)
                         .cornerRadius(10)
-                    
                 } else {
                     PlayerView(player: player)
                         .frame(width: 400, height: 300)
@@ -78,13 +75,11 @@ struct DetailedVideoView: View {
                 .fontWeight(.medium)
                 .padding(10)
             
-            
             Spacer()
         }
         .onDisappear(perform: {
             player.pause()
         })
-            
             .navigationBarItems(trailing: Button(action: {
                 //download video
             }, label: {

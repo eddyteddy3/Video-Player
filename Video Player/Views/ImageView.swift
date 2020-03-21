@@ -10,14 +10,10 @@ import SwiftUI
 
 struct ImageView: View {
     @ObservedObject var image: ImageLoader
-    var height: CGFloat
-    var width: CGFloat
     static var placeholderImage = UIImage.init(systemName: "exclamationmark.icloud.fill")
     
-    init(imageUrl: String, height: CGFloat, width: CGFloat) {
+    init(imageUrl: String) {
         image = ImageLoader(url: imageUrl)
-        self.width = width
-        self.height = height
     }
     
     var body: some View {
@@ -29,6 +25,6 @@ struct ImageView: View {
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageView(imageUrl: "", height: 0, width: 0)
+        ImageView(imageUrl: "")
     }
 }

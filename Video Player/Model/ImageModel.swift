@@ -31,3 +31,4 @@ class ImageLoader: ObservableObject {
         }.resume()
     }
 }
+
