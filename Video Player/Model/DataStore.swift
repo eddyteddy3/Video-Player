@@ -17,11 +17,9 @@ class DataStore: ObservableObject {
     }
     
     func getPosts() {
-        //
         ApiCall.init().getData { (videos) in
             self.videos = videos
         }
-        
     }
 }
 

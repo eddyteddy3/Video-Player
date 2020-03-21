@@ -18,8 +18,8 @@ struct ImageView: View {
     
     var body: some View {
         Image(uiImage: image.image ?? ImageView.placeholderImage!)
-        .resizable()
-        .scaledToFill()
+            .resizable()
+            .aspectRatio(contentMode: .fill)
     }
 }
 
@@ -28,3 +28,6 @@ struct ImageView_Previews: PreviewProvider {
         ImageView(imageUrl: "")
     }
 }
+
+
+
