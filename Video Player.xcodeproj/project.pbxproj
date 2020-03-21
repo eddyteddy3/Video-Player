@@ -20,6 +20,7 @@
 		033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9AF2424E9C300FD0D18 /* LoadImage.swift */; };
 		033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */; };
 		033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B324260B3700FD0D18 /* ImageModel.swift */; };
+		033CA9B624260CA800FD0D18 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B524260CA800FD0D18 /* ImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		033CA9AF2424E9C300FD0D18 /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 		033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVideoView.swift; sourceTree = "<group>"; };
 		033CA9B324260B3700FD0D18 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		033CA9B524260CA800FD0D18 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				033CA9892423F69D00FD0D18 /* ContentView.swift */,
 				033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */,
+				033CA9B524260CA800FD0D18 /* ImageView.swift */,
 				033CA99D2423F8E100FD0D18 /* Assets */,
 			);
 			path = Views;
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				033CA9B624260CA800FD0D18 /* ImageView.swift in Sources */,
 				033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */,
 				033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */,
 				033CA9862423F69D00FD0D18 /* AppDelegate.swift in Sources */,
