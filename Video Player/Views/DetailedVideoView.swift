@@ -10,15 +10,43 @@ import SwiftUI
 import SDWebImageSwiftUI
 import AVKit
 
-struct PlayerView: UIViewRepresentable {
-    let player: AVPlayer
+struct PlayerView: UIViewControllerRepresentable {
     
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<PlayerView>) {
+    var player: AVPlayer
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<PlayerView>) -> AVPlayerViewController {
         
+        let playerVC = AVPlayerViewController()
+        let player1 = player
+        
+        playerVC.player = player1
+        
+        return playerVC
     }
     
-    func makeUIView(context: Context) -> UIView {
-        return PlayerUIView(player: player)
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<PlayerView>) {
+        
+    }
+}
+
+struct PlayerContainer: View {
+    let player: AVPlayer
+    @State var isPlaying = true
+    
+    var body: some View {
+        ZStack {
+            PlayerView(player: player)
+            Button(action: {
+                self.isPlaying.toggle()
+                if self.isPlaying {
+                    self.player.pause()
+                } else {
+                    self.player.play()
+                }
+            }) {
+                Image(systemName: "play.circle")
+            }
+        }
     }
 }
 
@@ -27,7 +55,7 @@ class PlayerUIView: UIView {
     
     init(player: AVPlayer) {
         super.init(frame: .zero)
-        player.play()
+        //player.play()
         
         playerLayer.player = player
         layer.addSublayer(playerLayer)
@@ -72,10 +100,10 @@ struct DetailedVideoView: View {
                 
                 Button(action: {
                     self.isShowing.toggle()
-                    
                 }) {
-                    Image(systemName: "play.circle")
+                    Image(systemName: isShowing ? "play.circle" : "").accentColor(Color.black)
                 }
+                
             }
             //.padding(.top)
             
@@ -99,7 +127,7 @@ struct DetailedVideoView: View {
         }
         
         .navigationBarItems(trailing: Button(action: {
-            
+            //download video
         }, label: {
             HStack {
                 Text("Download Video")
