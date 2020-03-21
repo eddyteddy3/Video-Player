@@ -19,6 +19,7 @@
 		033CA9AE2424E15D00FD0D18 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 033CA9AD2424E15D00FD0D18 /* SDWebImageSwiftUI */; };
 		033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9AF2424E9C300FD0D18 /* LoadImage.swift */; };
 		033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */; };
+		033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B324260B3700FD0D18 /* ImageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		033CA9A524241D9A00FD0D18 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		033CA9AF2424E9C300FD0D18 /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 		033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVideoView.swift; sourceTree = "<group>"; };
+		033CA9B324260B3700FD0D18 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				033CA9A02423F94300FD0D18 /* DataModel.swift */,
 				033CA9A524241D9A00FD0D18 /* DataStore.swift */,
+				033CA9B324260B3700FD0D18 /* ImageModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */,
 				033CA9862423F69D00FD0D18 /* AppDelegate.swift in Sources */,
 				033CA9A624241D9A00FD0D18 /* DataStore.swift in Sources */,
+				033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */,
 				033CA9A12423F94300FD0D18 /* DataModel.swift in Sources */,
 				033CA9A42423FA5100FD0D18 /* APICall.swift in Sources */,
 				033CA9882423F69D00FD0D18 /* SceneDelegate.swift in Sources */,

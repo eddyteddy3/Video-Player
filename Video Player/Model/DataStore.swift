@@ -25,16 +25,4 @@ class DataStore: ObservableObject {
     }
 }
 
-class ImageStore: ObservableObject {
-    @Published var image = UIImage()
-    
-    init(url: String) {
-        
-    }
-    
-    func getImage(url: String) {
-        
-    }
-}
-
 
