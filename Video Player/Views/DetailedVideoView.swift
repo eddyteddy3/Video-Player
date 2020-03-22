@@ -29,14 +29,43 @@ struct PlayerView: UIViewControllerRepresentable {
 }
 
 struct PlayerContainerView: View {
-    let player: AVPlayer
+    @State var isShowing = true
+    var player: AVPlayer
     
-    init(player: AVPlayer) {
+    init(videoURL: String) {
+        let player = AVPlayer(url: URL(string: videoURL)!)
+        
         self.player = player
     }
     
     var body: some View {
-        PlayerView(player: player)
+        ZStack{
+            PlayerView(player: player)
+            //PlayerControls(player: player)
+        }.onDisappear {
+            self.player.pause()
+        }
+    }
+}
+
+struct PlayerControls: View  {
+    @State var playerPaused = true
+    let player: AVPlayer
+    
+    var body: some View {
+        Button(action: {
+            self.playerPaused.toggle()
+            if self.playerPaused {
+                self.player.pause()
+            } else {
+                self.player.play()
+            }
+        }) {
+            Image(systemName: playerPaused ? "" : "play.circle")
+                .resizable()
+                .frame(width: 60, height: 60)
+                .accentColor(Color.black)
+        }
     }
 }
 
@@ -53,23 +82,26 @@ struct DetailedVideoView: View {
     var fileManager = FileManager.default
     
     var body: some View {
-        let player = AVPlayer(url: URL(string: videoURL)!)
-        
-        return VStack {
+        VStack {
             ZStack {
                 if !isShowing {
                     ImageView(imageUrl: imageURL)
                         .frame(width: 400, height: 300, alignment: .center)
                         .cornerRadius(10)
                 } else {
-                    PlayerView(player: player)
+                    /*PlayerView(player: player)
+                     .frame(width: 400, height: 300)
+                     .cornerRadius(10)*/
+                    if isShowing {
+                        PlayerContainerView(videoURL: self.videoURL)
                         .frame(width: 400, height: 300)
                         .cornerRadius(10)
+                    }
+                    
                 }
                 
                 Button(action: {
                     self.isShowing.toggle()
-                    player.play()
                 }) {
                     Image(systemName: isShowing ? "" : "play.circle")
                         .resizable()
@@ -93,10 +125,9 @@ struct DetailedVideoView: View {
             Spacer()
         }
         .onDisappear(perform: {
-            player.pause()
         })
             .navigationBarItems(trailing: Button(action: {
-                self.PlayVideo(videoUrl: self.videoURL, videoName: self.videoName)
+                //self.PlayVideo(videoUrl: self.videoURL, videoName: self.videoName)
             }, label: {
                 HStack {
                     Text("Download Video")
@@ -105,19 +136,20 @@ struct DetailedVideoView: View {
             }))
     }
     
-    func PlayVideo(videoUrl: String, videoName: String) {
+    func isVideoExist(videoUrl:  inout String, videoName: String) -> Bool {
         let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
         let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
-    
+        
         if let path = destination?.path {
             if fileManager.fileExists(atPath: path) {
                 print("Already exists")
+                return true
             } else {
-                downloadVideo(videoURL: videoURL, destination: destination!)
+                return false
             }
         }
         
-        
+        return false
     }
     
     func downloadVideo(videoURL: String, destination: URL) {
