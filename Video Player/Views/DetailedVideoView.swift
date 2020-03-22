@@ -31,9 +31,14 @@ struct PlayerView: UIViewControllerRepresentable {
 struct PlayerContainerView: View {
     @State var isShowing = true
     var player: AVPlayer
+    var video: VideoURL
     
-    init(videoURL: String) {
-        let player = AVPlayer(url: URL(string: videoURL)!)
+    init(videoURL: String, videoName: String) {
+        video = VideoURL(videoName: videoName, videoURL: videoURL)
+        
+        let url = video.getVideoPath()
+        
+        let player = AVPlayer(url: url)
         
         self.player = player
     }
@@ -46,6 +51,8 @@ struct PlayerContainerView: View {
             self.player.pause()
         }
     }
+    
+    
 }
 
 struct PlayerControls: View  {
@@ -69,7 +76,78 @@ struct PlayerControls: View  {
     }
 }
 
-
+class VideoURL: AVAssetDownloadDelegate {
+    func isEqual(_ object: Any?) -> Bool {
+        <#code#>
+    }
+    
+    var hash: Int
+    
+    var superclass: AnyClass?
+    
+    func `self`() -> Self {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func isProxy() -> Bool {
+        <#code#>
+    }
+    
+    func isKind(of aClass: AnyClass) -> Bool {
+        <#code#>
+    }
+    
+    func isMember(of aClass: AnyClass) -> Bool {
+        <#code#>
+    }
+    
+    func conforms(to aProtocol: Protocol) -> Bool {
+        <#code#>
+    }
+    
+    func responds(to aSelector: Selector!) -> Bool {
+        <#code#>
+    }
+    
+    var description: String
+    
+    var videoName: String
+    var videoURL: String
+    var fileManager = FileManager.default
+    
+    init(videoName: String, videoURL: String) {
+        self.videoName = videoName
+        self.videoURL = videoURL
+    }
+    
+    
+    func getVideoPath() -> URL {
+        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
+        let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
+        
+        if let path = destination?.path {
+            if fileManager.fileExists(atPath: path) {
+                print("Already exists \(destination)")
+                return destination!
+            } else {
+                return URL(string: videoURL)!
+            }
+        }
+        return URL(string: videoURL)!
+    }
+}
 
 struct DetailedVideoView: View {
     @State var videoName = ""
@@ -93,7 +171,7 @@ struct DetailedVideoView: View {
                      .frame(width: 400, height: 300)
                      .cornerRadius(10)*/
                     if isShowing {
-                        PlayerContainerView(videoURL: self.videoURL)
+                        PlayerContainerView(videoURL: self.videoURL, videoName: self.videoName)
                         .frame(width: 400, height: 300)
                         .cornerRadius(10)
                     }
@@ -127,16 +205,19 @@ struct DetailedVideoView: View {
         .onDisappear(perform: {
         })
             .navigationBarItems(trailing: Button(action: {
-                //self.PlayVideo(videoUrl: self.videoURL, videoName: self.videoName)
+                self.downloadVideo(videoURL: self.videoURL)
             }, label: {
                 HStack {
                     Text("Download Video")
                     Image(systemName: "square.and.arrow.down")
+                    
                 }
             }))
     }
     
-    func isVideoExist(videoUrl:  inout String, videoName: String) -> Bool {
+    //function to check whether the video already exists in the app or not.
+    //this funciton will help play the videos offline.
+    func isVideoExist(videoName: String) -> Bool {
         let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
         let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
         
@@ -148,12 +229,14 @@ struct DetailedVideoView: View {
                 return false
             }
         }
-        
         return false
     }
     
-    func downloadVideo(videoURL: String, destination: URL) {
+    func downloadVideo(videoURL: String) {
         guard let url = URL(string: videoURL) else {return}
+        
+        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
+        let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
         
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
@@ -161,8 +244,8 @@ struct DetailedVideoView: View {
         let task = session.downloadTask(with: URLRequest(url: url)) { (tempURL, _, error) in
             if let tempUrl = tempURL, error == nil {
                 do {
-                    try FileManager.default.copyItem(at: tempUrl, to: destination)
-                    print("Video Downloaded at \(destination.absoluteString)")
+                    try FileManager.default.copyItem(at: tempUrl, to: destination!)
+                    print("Video Downloaded at \(destination!.absoluteString)")
                 } catch let err {
                     print("Error: \(err.localizedDescription)")
                 }
@@ -179,3 +262,5 @@ struct DetailedVideoView_Previews: PreviewProvider {
         DetailedVideoView()
     }
 }
+
+
