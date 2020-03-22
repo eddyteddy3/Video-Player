@@ -28,6 +28,20 @@ struct PlayerView: UIViewControllerRepresentable {
     }
 }
 
+struct PlayerContainerView: View {
+    let player: AVPlayer
+    
+    init(player: AVPlayer) {
+        self.player = player
+    }
+    
+    var body: some View {
+        PlayerView(player: player)
+    }
+}
+
+
+
 struct DetailedVideoView: View {
     @State var videoName = ""
     @State var description = ""
@@ -35,6 +49,8 @@ struct DetailedVideoView: View {
     
     var imageURL = ""
     var videoURL = ""
+    
+    var fileManager = FileManager.default
     
     var body: some View {
         let player = AVPlayer(url: URL(string: videoURL)!)
@@ -80,7 +96,7 @@ struct DetailedVideoView: View {
             player.pause()
         })
             .navigationBarItems(trailing: Button(action: {
-                self.downloadVideo(videoUrl: self.videoURL, videoName: self.videoName)
+                self.PlayVideo(videoUrl: self.videoURL, videoName: self.videoName)
             }, label: {
                 HStack {
                     Text("Download Video")
@@ -89,10 +105,23 @@ struct DetailedVideoView: View {
             }))
     }
     
-    func downloadVideo(videoUrl: String, videoName: String) {
-        guard let url = URL(string: videoUrl) else {return}
-        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
+    func PlayVideo(videoUrl: String, videoName: String) {
+        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
         let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
+    
+        if let path = destination?.path {
+            if fileManager.fileExists(atPath: path) {
+                print("Already exists")
+            } else {
+                downloadVideo(videoURL: videoURL, destination: destination!)
+            }
+        }
+        
+        
+    }
+    
+    func downloadVideo(videoURL: String, destination: URL) {
+        guard let url = URL(string: videoURL) else {return}
         
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)
@@ -100,20 +129,16 @@ struct DetailedVideoView: View {
         let task = session.downloadTask(with: URLRequest(url: url)) { (tempURL, _, error) in
             if let tempUrl = tempURL, error == nil {
                 do {
-                    try FileManager.default.copyItem(at: tempUrl, to: destination!)
-                    print("Video Downloaded at \(destination?.absoluteString)")
+                    try FileManager.default.copyItem(at: tempUrl, to: destination)
+                    print("Video Downloaded at \(destination.absoluteString)")
                 } catch let err {
                     print("Error: \(err.localizedDescription)")
                 }
             } else {
-                print("ERROR downloading: \(error?.localizedDescription)")
+                print("ERROR downloading: \(error?.localizedDescription ?? "string error")")
             }
         }
         task.resume()
-    }
-    
-    func showAlert() {
-        
     }
 }
 
