@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import AVKit
+
+
+extension ImageCache {
+    static var imageCache = ImageCache()
+    
+    static func getImageCache() -> ImageCache {
+        return imageCache
+    }
+}

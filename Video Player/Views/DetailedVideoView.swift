@@ -76,60 +76,17 @@ struct PlayerControls: View  {
     }
 }
 
-class VideoURL: AVAssetDownloadDelegate {
-    func isEqual(_ object: Any?) -> Bool {
-        <#code#>
-    }
-    
-    var hash: Int
-    
-    var superclass: AnyClass?
-    
-    func `self`() -> Self {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func isProxy() -> Bool {
-        <#code#>
-    }
-    
-    func isKind(of aClass: AnyClass) -> Bool {
-        <#code#>
-    }
-    
-    func isMember(of aClass: AnyClass) -> Bool {
-        <#code#>
-    }
-    
-    func conforms(to aProtocol: Protocol) -> Bool {
-        <#code#>
-    }
-    
-    func responds(to aSelector: Selector!) -> Bool {
-        <#code#>
-    }
-    
-    var description: String
-    
+class VideoURL {
     var videoName: String
     var videoURL: String
     var fileManager = FileManager.default
     
+    
     init(videoName: String, videoURL: String) {
         self.videoName = videoName
         self.videoURL = videoURL
+        
+        
     }
     
     
@@ -262,5 +219,3 @@ struct DetailedVideoView_Previews: PreviewProvider {
         DetailedVideoView()
     }
 }
-
-
