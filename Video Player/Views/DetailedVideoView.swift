@@ -29,8 +29,8 @@ struct PlayerView: UIViewControllerRepresentable {
 }
 
 struct DetailedVideoView: View {
-    @State var videoName = "This is video name for"
-    @State var description = "This description is for a very very long text"
+    @State var videoName = ""
+    @State var description = ""
     @State var isShowing = false
     
     var imageURL = ""
@@ -80,13 +80,40 @@ struct DetailedVideoView: View {
             player.pause()
         })
             .navigationBarItems(trailing: Button(action: {
-                
+                self.downloadVideo(videoUrl: self.videoURL, videoName: self.videoName)
             }, label: {
                 HStack {
                     Text("Download Video")
                     Image(systemName: "square.and.arrow.down")
                 }
             }))
+    }
+    
+    func downloadVideo(videoUrl: String, videoName: String) {
+        guard let url = URL(string: videoUrl) else {return}
+        let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
+        let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
+        
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig)
+        
+        let task = session.downloadTask(with: URLRequest(url: url)) { (tempURL, _, error) in
+            if let tempUrl = tempURL, error == nil {
+                do {
+                    try FileManager.default.copyItem(at: tempUrl, to: destination!)
+                    print("Video Downloaded at \(destination?.absoluteString)")
+                } catch let err {
+                    print("Error: \(err.localizedDescription)")
+                }
+            } else {
+                print("ERROR downloading: \(error?.localizedDescription)")
+            }
+        }
+        task.resume()
+    }
+    
+    func showAlert() {
+        
     }
 }
 
