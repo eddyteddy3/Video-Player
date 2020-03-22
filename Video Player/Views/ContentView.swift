@@ -11,6 +11,7 @@ import UIKit
 
 struct ContentView: View {
     @ObservedObject var store = DataStore()
+    var cache = ImageCache.getImageCache()
     
     var body: some View {
         NavigationView {

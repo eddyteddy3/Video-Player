@@ -60,7 +60,6 @@ struct DetailedVideoView: View {
                         .frame(width: 60, height: 60)
                         .accentColor(Color.black)
                 }
-                
             }
             
             Text(videoName)
@@ -81,7 +80,7 @@ struct DetailedVideoView: View {
             player.pause()
         })
             .navigationBarItems(trailing: Button(action: {
-                //download video
+                
             }, label: {
                 HStack {
                     Text("Download Video")
