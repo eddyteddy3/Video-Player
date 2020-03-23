@@ -110,6 +110,8 @@ struct DetailedVideoView: View {
     @State var videoName = ""
     @State var description = ""
     @State var isShowing = false
+    @State var progress = 0.0
+    @State var showAlert = false
     
     var imageURL = ""
     var videoURL = ""
@@ -120,6 +122,7 @@ struct DetailedVideoView: View {
     
     var body: some View {
         VStack {
+            
             ZStack {
                 if !isShowing {
                     ImageView(imageUrl: imageURL)
@@ -164,7 +167,7 @@ struct DetailedVideoView: View {
         .onDisappear(perform: {
         })
             .navigationBarItems(trailing: Button(action: {
-                self.downloadVideo(videoURL: self.videoURL)
+                self.downloadVideo(videoURL: self.videoURL, videoName: self.videoName)
             }, label: {
                 HStack {
                     Text("Download Video")
@@ -191,28 +194,22 @@ struct DetailedVideoView: View {
         return false
     }
     
-    func downloadVideo(videoURL: String) {
-        guard let url = URL(string: videoURL) else {return}
-        
-        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
-        let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
-        
-        let sessionConfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: sessionConfig)
-        
-        let task = session.downloadTask(with: URLRequest(url: url)) { (tempURL, _, error) in
-            if let tempUrl = tempURL, error == nil {
-                do {
-                    try FileManager.default.copyItem(at: tempUrl, to: destination!)
-                    print("Video Downloaded at \(destination!.absoluteString)")
-                } catch let err {
-                    print("Error: \(err.localizedDescription)")
+    func downloadVideo(videoURL: String, videoName: String) {
+        if let videoDownloader = downloader {
+            switch videoDownloader.state {
+            case .notDownloaded:
+                print("Downloading started")
+                videoDownloader.download { percent in
+                    self.progress = percent/100
+                }.finish { (path) in
+                    self.showAlert = true
                 }
-            } else {
-                print("ERROR downloading: \(error?.localizedDescription ?? "string error")")
+            case .downloading:
+                break
+            case .downloaded:
+                self.showAlert = true
             }
         }
-        task.resume()
     }
 }
 
