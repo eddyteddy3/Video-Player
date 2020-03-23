@@ -116,7 +116,8 @@ struct DetailedVideoView: View {
     @State var description = ""
     @State var isShowing = false
     @State var progress = 0.0
-    @State var showAlert = false
+    @State var inProgress = false
+    @State var isDownloaded = false
     
     var imageURL = ""
     var videoURL = ""
@@ -167,8 +168,14 @@ struct DetailedVideoView: View {
                 self.downloadVideo(videoURL: self.videoURL, videoName: self.videoName)
             }, label: {
                 HStack {
-                    Text("Download Video")
-                    Image(systemName: "square.and.arrow.down")
+                    if !inProgress {
+                        Text("Download Video")
+                        Image(systemName: "square.and.arrow.down")
+                    } else if inProgress && isDownloaded {
+                        Text("Already Downloaded!")
+                    } else {
+                        
+                    }
                 }
             }))
     }
@@ -184,14 +191,15 @@ struct DetailedVideoView: View {
             downloader.download { percent in
                 print("Progress: \(percent)")
                 self.progress = percent/100
+                self.inProgress = true
             }.finish { (path) in
                 print("Finished downloading: \(path)")
-                self.showAlert = true
+                
             }
         case .downloading:
             break
         case .downloaded:
-            self.showAlert = true
+            self.isDownloaded = true
         }
 
 //        if let videoDownloader = downloader {
