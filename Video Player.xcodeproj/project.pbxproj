@@ -24,6 +24,7 @@
 		033CAA232428427D00FD0D18 /* AssetStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA1F2428427C00FD0D18 /* AssetStore.swift */; };
 		033CAA242428427D00FD0D18 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA202428427C00FD0D18 /* SessionManager.swift */; };
 		033CAA252428427D00FD0D18 /* HLSion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA212428427C00FD0D18 /* HLSion.swift */; };
+		033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA272428CEC100FD0D18 /* ProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		033CAA202428427C00FD0D18 /* SessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		033CAA212428427C00FD0D18 /* HLSion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSion.swift; sourceTree = "<group>"; };
 		033CAA222428427D00FD0D18 /* HLSion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSion.h; sourceTree = "<group>"; };
+		033CAA272428CEC100FD0D18 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */,
 				033CA9B524260CA800FD0D18 /* ImageView.swift */,
 				033CA99D2423F8E100FD0D18 /* Assets */,
+				033CAA272428CEC100FD0D18 /* ProgressView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			files = (
 				033CA9B624260CA800FD0D18 /* ImageView.swift in Sources */,
 				033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */,
+				033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */,
 				033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */,
 				033CA9862423F69D00FD0D18 /* AppDelegate.swift in Sources */,
 				033CAA252428427D00FD0D18 /* HLSion.swift in Sources */,

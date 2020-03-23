@@ -132,7 +132,6 @@ struct DetailedVideoView: View {
                         .frame(width: 400, height: 300)
                         .cornerRadius(10)
                     }
-                    
                 }
                 
                 Button(action: {
@@ -169,10 +168,18 @@ struct DetailedVideoView: View {
                         Text("Download Video")
                         Image(systemName: "square.and.arrow.down")
                     } else if inProgress && isDownloaded {
-                        Text("Already Downloaded!")
+                        Text("Downloaded!")
                     } else if inProgress == true {
                         //ProgressBar(value: $progress)
                           //  .frame(width: 100, height: 20, alignment: .trailing)
+                        Button("Cancel") {
+                            
+                        }
+                        
+                        
+                        ProgressView(progress: $progress)
+                        
+                        
                     }
                 }
             }))
@@ -187,12 +194,12 @@ struct DetailedVideoView: View {
         case .notDownloaded:
             print("Downloading started")
             downloader.download { percent in
-                print("Progress: \(percent)")
+                print("Progress: \(percent * 10)")
                 self.inProgress = true
-                self.progress = CGFloat(percent * 1000)
+                self.progress = CGFloat(percent * 10)
             }.finish { (path) in
                 print("Finished downloading: \(path)")
-                
+                self.isDownloaded = true
             }
         case .downloading:
             break
@@ -200,9 +207,6 @@ struct DetailedVideoView: View {
             self.inProgress = true
             self.isDownloaded = true
         }
-
-//        if let videoDownloader = downloader {
-//        }
     }
 }
 
