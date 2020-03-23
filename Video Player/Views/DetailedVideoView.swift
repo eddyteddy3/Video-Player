@@ -106,10 +106,8 @@ class OfflineVideo {
                 print("does not exist")
                 return false
             }
-        } else {
-            print("Error")
-            return false
         }
+        return false
     }
 }
 
@@ -122,8 +120,6 @@ struct DetailedVideoView: View {
     
     var imageURL = ""
     var videoURL = ""
-    
-    var downloader: HLSion?
     
     var body: some View {
         VStack {
@@ -173,7 +169,6 @@ struct DetailedVideoView: View {
                 HStack {
                     Text("Download Video")
                     Image(systemName: "square.and.arrow.down")
-                    
                 }
             }))
     }
@@ -181,25 +176,26 @@ struct DetailedVideoView: View {
     //function to download the video with the progress bar
     func downloadVideo(videoURL: String, videoName: String) {
         guard let url = URL(string: videoURL) else {return}
-        //downloader = HLSion(url: url, name: videoName)
+        let downloader = HLSion(url: url, name: videoName)
         
-        if let videoDownloader = downloader {
-            switch videoDownloader.state {
-            case .notDownloaded:
-                print("Downloading started")
-                videoDownloader.download { percent in
-                    print("Progress: \(percent)")
-                    self.progress = percent/100
-                }.finish { (path) in
-                    print("Finished downloading: \(path)")
-                    self.showAlert = true
-                }
-            case .downloading:
-                break
-            case .downloaded:
+        switch downloader.state {
+        case .notDownloaded:
+            print("Downloading started")
+            downloader.download { percent in
+                print("Progress: \(percent)")
+                self.progress = percent/100
+            }.finish { (path) in
+                print("Finished downloading: \(path)")
                 self.showAlert = true
             }
+        case .downloading:
+            break
+        case .downloaded:
+            self.showAlert = true
         }
+
+//        if let videoDownloader = downloader {
+//        }
     }
 }
 
