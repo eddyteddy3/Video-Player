@@ -180,18 +180,18 @@ struct DetailedVideoView: View {
     //function to check whether the video already exists in the app or not.
     //this funciton will help play the videos offline.
     func isVideoExist(videoName: String) -> Bool {
-        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
-        let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
-        
-        if let path = destination?.path {
-            if fileManager.fileExists(atPath: path) {
-                print("Already exists")
+        if let videoPath = downloader?.localUrl {
+            if videoPath.absoluteString.contains(videoName) {
+                print("already exits")
                 return true
             } else {
+                print("does not exist")
                 return false
             }
+        } else {
+            print("Error")
+            return false
         }
-        return false
     }
     
     func downloadVideo(videoURL: String, videoName: String) {
