@@ -38,25 +38,20 @@ struct PlayerContainerView: View {
     
     init(videoURL: String, videoName: String) {
         offlineVideo = HLSion(url: URL(string: videoURL)!, name: videoName)
-        
         video = OfflineVideo(videoName: videoName, offlineVideo: offlineVideo!)
         
         if video.isVideoExist() {
             print("Video Exist")
-            print("Video does not exist")
-            print("PATH \(offlineVideo?.localUrl?.absoluteString ?? "nil")")
-            print("Video name: \(videoName)")
             
-            
+            let asset = AVURLAsset(url: (offlineVideo?.localUrl)!)
+            let playerItem = AVPlayerItem(asset: asset)
+            self.player = AVPlayer(playerItem: playerItem)
         } else {
             print("Video does not exist")
-            print("PATH \(offlineVideo?.localUrl?.absoluteString ?? "nil")")
-            print("Video name: \(videoName)")
+            
+            let player = AVPlayer(url: URL(string: videoURL)!)
+            self.player = player
         }
-        
-        let player = AVPlayer(url: URL(string: videoURL)!)
-        
-        self.player = player
     }
     
     var body: some View {
@@ -106,8 +101,10 @@ class OfflineVideo {
         if let _ = offlineVideo?.localUrl {
             print("Exist")
             return true
+        } else {
+            print("not exist")
+            return false
         }
-        return false
     }
 }
 
