@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,7 +16,6 @@
 		033CA9A12423F94300FD0D18 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9A02423F94300FD0D18 /* DataModel.swift */; };
 		033CA9A42423FA5100FD0D18 /* APICall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9A32423FA5100FD0D18 /* APICall.swift */; };
 		033CA9A624241D9A00FD0D18 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9A524241D9A00FD0D18 /* DataStore.swift */; };
-		033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9AF2424E9C300FD0D18 /* LoadImage.swift */; };
 		033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */; };
 		033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B324260B3700FD0D18 /* ImageModel.swift */; };
 		033CA9B624260CA800FD0D18 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CA9B524260CA800FD0D18 /* ImageView.swift */; };
@@ -25,6 +24,7 @@
 		033CAA242428427D00FD0D18 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA202428427C00FD0D18 /* SessionManager.swift */; };
 		033CAA252428427D00FD0D18 /* HLSion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA212428427C00FD0D18 /* HLSion.swift */; };
 		033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA272428CEC100FD0D18 /* ProgressView.swift */; };
+		03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 03D724E7242935FA0092076B /* SwiftUIPullToRefresh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,6 @@
 		033CA9A02423F94300FD0D18 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		033CA9A32423FA5100FD0D18 /* APICall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICall.swift; sourceTree = "<group>"; };
 		033CA9A524241D9A00FD0D18 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		033CA9AF2424E9C300FD0D18 /* LoadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadImage.swift; sourceTree = "<group>"; };
 		033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedVideoView.swift; sourceTree = "<group>"; };
 		033CA9B324260B3700FD0D18 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		033CA9B524260CA800FD0D18 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +144,6 @@
 			children = (
 				033CAA1E2428425C00FD0D18 /* HLSion Downloader */,
 				033CA9A32423FA5100FD0D18 /* APICall.swift */,
-				033CA9AF2424E9C300FD0D18 /* LoadImage.swift */,
 				033CA9B9242772E800FD0D18 /* Extensions.swift */,
 			);
 			path = Helpers;
@@ -178,6 +177,7 @@
 			);
 			name = "Video Player";
 			packageProductDependencies = (
+				03D724E7242935FA0092076B /* SwiftUIPullToRefresh */,
 			);
 			productName = "Video Player";
 			productReference = 033CA9822423F69D00FD0D18 /* Video Player.app */;
@@ -208,6 +208,7 @@
 			);
 			mainGroup = 033CA9792423F69D00FD0D18;
 			packageReferences = (
+				03D724E6242935FA0092076B /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */,
 			);
 			productRefGroup = 033CA9832423F69D00FD0D18 /* Products */;
 			projectDirPath = "";
@@ -239,7 +240,6 @@
 				033CA9B624260CA800FD0D18 /* ImageView.swift in Sources */,
 				033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */,
 				033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */,
-				033CA9B02424E9C300FD0D18 /* LoadImage.swift in Sources */,
 				033CA9862423F69D00FD0D18 /* AppDelegate.swift in Sources */,
 				033CAA252428427D00FD0D18 /* HLSion.swift in Sources */,
 				033CA9A624241D9A00FD0D18 /* DataStore.swift in Sources */,
@@ -444,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		03D724E6242935FA0092076B /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/SwiftUI-PullToRefresh";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		03D724E7242935FA0092076B /* SwiftUIPullToRefresh */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03D724E6242935FA0092076B /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */;
+			productName = SwiftUIPullToRefresh;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 033CA97A2423F69D00FD0D18 /* Project object */;
 }

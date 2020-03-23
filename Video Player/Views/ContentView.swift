@@ -8,10 +8,12 @@
 
 import SwiftUI
 import UIKit
+import SwiftUIPullToRefresh
 
 struct ContentView: View {
     @ObservedObject var store = DataStore()
     var cache = ImageCache.getImageCache()
+    var namesArray: [Post] = []
     
     var body: some View {
         NavigationView {
@@ -26,6 +28,18 @@ struct ContentView: View {
                 }
             }
         .navigationBarTitle("Videos")
+            .navigationBarItems(trailing: Button("Load Items"){
+                for names in self.store.videos {
+                    let post = self.store.loadListFromCache(videoName: names.name)
+                     print(post)
+                }
+            })
+        }
+    }
+    
+    func fillArray() {
+        for names in store.videos {
+            store.loadListFromCache(videoName: names.name)
         }
     }
 }
@@ -38,13 +52,13 @@ struct ContentView_Previews: PreviewProvider {
 
 
 class VideoListCache {
-    var cache = NSCache<NSString, NSString>()
+    var cache = NSCache<NSString, AnyObject>()
     
-    func get(forKey: String) -> String? {
-        return cache.object(forKey: NSString(string: forKey)) as String?
+    func get(forKey: String) -> Post? {
+        return cache.object(forKey: NSString(string: forKey)) as? Post
     }
     
-    func set(forKey: String, imageUrl: String) {
-        cache.setObject(NSString(string: imageUrl), forKey: NSString(string: forKey))
+    func set(forKey: String, post: Post) {
+        cache.setObject(post as AnyObject, forKey: NSString(string: forKey))
     }
 }

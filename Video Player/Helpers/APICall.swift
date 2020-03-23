@@ -10,6 +10,8 @@ import Foundation
 
 class ApiCall {
     
+    var postCache = VideoListCache.getListCache()
+    
     func getData(completion: @escaping ([Post]) -> ()) {
         guard let url = URL(string: "https://iphonephotographyschool.com/test-api/videos") else {return}
         

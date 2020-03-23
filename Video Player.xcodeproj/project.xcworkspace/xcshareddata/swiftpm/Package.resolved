@@ -2,20 +2,11 @@
   "object": {
     "pins": [
       {
-        "package": "SDWebImage",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
+        "package": "SwiftUIPullToRefresh",
+        "repositoryURL": "https://github.com/AppPear/SwiftUI-PullToRefresh",
         "state": {
           "branch": null,
-          "revision": "2dcf1b65994d92ef8806f52dc41aa6fdd677489c",
-          "version": "5.6.1"
-        }
-      },
-      {
-        "package": "SDWebImageSwiftUI",
-        "repositoryURL": "https://github.com/SDWebImage/SDWebImageSwiftUI.git",
-        "state": {
-          "branch": null,
-          "revision": "b60924f6b83bd942b88282ee6da277cfc3b7383a",
+          "revision": "5850f1ead6c4931015231bde26f38b9f543342aa",
           "version": "1.0.0"
         }
       }
