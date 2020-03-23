@@ -26,9 +26,6 @@ struct ProgressView: View {
                 Circle()
                     .stroke(Color.black.opacity(0.1), style: StrokeStyle(lineWidth: 2))
                     .frame(width: 40, height: 40)
-                
-                Text("\(progress)")
-                    .frame(width: 15, height: 15, alignment: .center)
             }
         }
     }

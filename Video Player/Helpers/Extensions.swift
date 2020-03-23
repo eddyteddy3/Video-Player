@@ -11,9 +11,17 @@ import AVKit
 
 
 extension ImageCache {
-    static var imageCache = ImageCache()
+    private static var imageCache = ImageCache()
     
     static func getImageCache() -> ImageCache {
         return imageCache
+    }
+}
+
+extension VideoListCache {
+    private static var listCache = VideoListCache()
+    
+    static func getListCache() -> VideoListCache {
+        return listCache
     }
 }

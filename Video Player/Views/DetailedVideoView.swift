@@ -120,7 +120,9 @@ struct DetailedVideoView: View {
     var videoURL = ""
     
     var body: some View {
-        VStack {
+        let downloader = HLSion(url: URL(string: videoURL)!, name: videoName)
+        
+        return VStack {
             ZStack {
                 if !isShowing {
                     ImageView(imageUrl: imageURL)
@@ -129,8 +131,8 @@ struct DetailedVideoView: View {
                 } else {
                     if isShowing {
                         PlayerContainerView(videoURL: self.videoURL, videoName: self.videoName)
-                        .frame(width: 400, height: 300)
-                        .cornerRadius(10)
+                            .frame(width: 400, height: 300)
+                            .cornerRadius(10)
                     }
                 }
                 
@@ -161,7 +163,7 @@ struct DetailedVideoView: View {
         .onDisappear(perform: {
         })
             .navigationBarItems(trailing: Button(action: {
-                self.downloadVideo(videoURL: self.videoURL, videoName: self.videoName)
+                self.downloadVideo(downloader: downloader)
             }, label: {
                 HStack {
                     if !inProgress {
@@ -171,24 +173,22 @@ struct DetailedVideoView: View {
                         Text("Downloaded!")
                     } else if inProgress == true {
                         //ProgressBar(value: $progress)
-                          //  .frame(width: 100, height: 20, alignment: .trailing)
+                        //  .frame(width: 100, height: 20, alignment: .trailing)
                         Button("Cancel") {
-                            
+                            downloader.download().cancelDownload()
+                            self.inProgress = false
+                            self.progress = 0.0
                         }
                         
-                        
                         ProgressView(progress: $progress)
-                        
-                        
                     }
                 }
             }))
     }
     
     //function to download the video with the progress bar
-    func downloadVideo(videoURL: String, videoName: String) {
-        guard let url = URL(string: videoURL) else {return}
-        let downloader = HLSion(url: url, name: videoName)
+    func downloadVideo(downloader: HLSion) {
+        //guard let url = URL(string: videoURL) else {return}
         
         switch downloader.state {
         case .notDownloaded:
@@ -200,12 +200,14 @@ struct DetailedVideoView: View {
             }.finish { (path) in
                 print("Finished downloading: \(path)")
                 self.isDownloaded = true
+                self.progress = 0.0
             }
         case .downloading:
             break
         case .downloaded:
             self.inProgress = true
             self.isDownloaded = true
+            self.progress = 0.0
         }
     }
 }

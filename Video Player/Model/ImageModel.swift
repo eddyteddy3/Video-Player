@@ -11,6 +11,7 @@ import SwiftUI
 
 class ImageLoader: ObservableObject {
     @Published var image: UIImage?
+    
     var imageURL: String?
     var imageCache = ImageCache.getImageCache()
     

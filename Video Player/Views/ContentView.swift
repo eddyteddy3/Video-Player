@@ -35,3 +35,16 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+class VideoListCache {
+    var cache = NSCache<NSString, NSString>()
+    
+    func get(forKey: String) -> String? {
+        return cache.object(forKey: NSString(string: forKey)) as String?
+    }
+    
+    func set(forKey: String, imageUrl: String) {
+        cache.setObject(NSString(string: imageUrl), forKey: NSString(string: forKey))
+    }
+}
