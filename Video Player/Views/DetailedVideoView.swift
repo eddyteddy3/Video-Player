@@ -9,6 +9,7 @@
 import SwiftUI
 import AVKit
 
+
 struct PlayerView: UIViewControllerRepresentable {
     var player: AVPlayer
     
@@ -36,14 +37,21 @@ struct PlayerContainerView: View {
     var offlineVideo: HLSion?
     
     init(videoURL: String, videoName: String) {
-        video = OfflineVideo(videoName: videoName, videoURL: videoURL)
-        
         offlineVideo = HLSion(url: URL(string: videoURL)!, name: videoName)
+        
+        video = OfflineVideo(videoName: videoName, offlineVideo: offlineVideo!)
         
         if video.isVideoExist() {
             print("Video Exist")
+            print("Video does not exist")
+            print("PATH \(offlineVideo?.localUrl?.absoluteString ?? "nil")")
+            print("Video name: \(videoName)")
+            
+            
         } else {
             print("Video does not exist")
+            print("PATH \(offlineVideo?.localUrl?.absoluteString ?? "nil")")
+            print("Video name: \(videoName)")
         }
         
         let player = AVPlayer(url: URL(string: videoURL)!)
@@ -84,28 +92,20 @@ struct PlayerControls: View  {
 
 class OfflineVideo {
     var videoName: String
-    var videoURL: String
     
     var offlineVideo: HLSion?
     
-    init(videoName: String, videoURL: String) {
+    init(videoName: String, offlineVideo: HLSion) {
         self.videoName = videoName
-        self.videoURL = videoURL
-        
-        self.offlineVideo = HLSion(url: URL(string: videoURL)!, name: videoName)
+        self.offlineVideo = offlineVideo
     }
     
     //function to check whether the video already exists in the app or not.
     //this funciton will help play the videos offline.
     func isVideoExist() -> Bool {
-        if let videoPath = offlineVideo?.localUrl {
-            if videoPath.absoluteString.contains(videoName) {
-                print("already exits")
-                return true
-            } else {
-                print("does not exist")
-                return false
-            }
+        if let _ = offlineVideo?.localUrl {
+            print("Exist")
+            return true
         }
         return false
     }
@@ -115,7 +115,7 @@ struct DetailedVideoView: View {
     @State var videoName = ""
     @State var description = ""
     @State var isShowing = false
-    @State var progress = 0.0
+    @State var progress: CGFloat = 0.0
     @State var inProgress = false
     @State var isDownloaded = false
     
@@ -173,8 +173,9 @@ struct DetailedVideoView: View {
                         Image(systemName: "square.and.arrow.down")
                     } else if inProgress && isDownloaded {
                         Text("Already Downloaded!")
-                    } else {
-                        
+                    } else if inProgress == true {
+                        //ProgressBar(value: $progress)
+                          //  .frame(width: 100, height: 20, alignment: .trailing)
                     }
                 }
             }))
@@ -190,8 +191,8 @@ struct DetailedVideoView: View {
             print("Downloading started")
             downloader.download { percent in
                 print("Progress: \(percent)")
-                self.progress = percent/100
                 self.inProgress = true
+                self.progress = CGFloat(percent * 1000)
             }.finish { (path) in
                 print("Finished downloading: \(path)")
                 
@@ -199,6 +200,7 @@ struct DetailedVideoView: View {
         case .downloading:
             break
         case .downloaded:
+            self.inProgress = true
             self.isDownloaded = true
         }
 
