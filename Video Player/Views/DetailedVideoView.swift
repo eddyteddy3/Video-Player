@@ -116,6 +116,8 @@ struct DetailedVideoView: View {
     
     var fileManager = FileManager.default
     
+    var downloader: HLSion?
+    
     var body: some View {
         VStack {
             ZStack {
