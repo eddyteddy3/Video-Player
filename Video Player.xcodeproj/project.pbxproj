@@ -25,6 +25,8 @@
 		033CAA252428427D00FD0D18 /* HLSion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA212428427C00FD0D18 /* HLSion.swift */; };
 		033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA272428CEC100FD0D18 /* ProgressView.swift */; };
 		03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 03D724E7242935FA0092076B /* SwiftUIPullToRefresh */; };
+		03D724EB242951EA0092076B /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 03D724EA242951EA0092076B /* ViewInspector */; };
+		03D724EF242952AE0092076B /* Unit Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D724EE242952AE0092076B /* Unit Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,7 @@
 		033CAA212428427C00FD0D18 /* HLSion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSion.swift; sourceTree = "<group>"; };
 		033CAA222428427D00FD0D18 /* HLSion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSion.h; sourceTree = "<group>"; };
 		033CAA272428CEC100FD0D18 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		03D724EE242952AE0092076B /* Unit Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit Test.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +59,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */,
+				03D724EB242951EA0092076B /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +149,7 @@
 				033CAA1E2428425C00FD0D18 /* HLSion Downloader */,
 				033CA9A32423FA5100FD0D18 /* APICall.swift */,
 				033CA9B9242772E800FD0D18 /* Extensions.swift */,
+				03D724EE242952AE0092076B /* Unit Test.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -178,6 +183,7 @@
 			name = "Video Player";
 			packageProductDependencies = (
 				03D724E7242935FA0092076B /* SwiftUIPullToRefresh */,
+				03D724EA242951EA0092076B /* ViewInspector */,
 			);
 			productName = "Video Player";
 			productReference = 033CA9822423F69D00FD0D18 /* Video Player.app */;
@@ -209,6 +215,7 @@
 			mainGroup = 033CA9792423F69D00FD0D18;
 			packageReferences = (
 				03D724E6242935FA0092076B /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */,
+				03D724E9242951EA0092076B /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			productRefGroup = 033CA9832423F69D00FD0D18 /* Products */;
 			projectDirPath = "";
@@ -246,6 +253,7 @@
 				033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */,
 				033CA9A12423F94300FD0D18 /* DataModel.swift in Sources */,
 				033CA9BA242772E800FD0D18 /* Extensions.swift in Sources */,
+				03D724EF242952AE0092076B /* Unit Test.swift in Sources */,
 				033CAA232428427D00FD0D18 /* AssetStore.swift in Sources */,
 				033CA9A42423FA5100FD0D18 /* APICall.swift in Sources */,
 				033CA9882423F69D00FD0D18 /* SceneDelegate.swift in Sources */,
@@ -454,6 +462,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		03D724E9242951EA0092076B /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -461,6 +477,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03D724E6242935FA0092076B /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */;
 			productName = SwiftUIPullToRefresh;
+		};
+		03D724EA242951EA0092076B /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03D724E9242951EA0092076B /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
