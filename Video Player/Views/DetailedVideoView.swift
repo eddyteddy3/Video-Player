@@ -31,14 +31,22 @@ struct PlayerView: UIViewControllerRepresentable {
 struct PlayerContainerView: View {
     @State var isShowing = true
     var player: AVPlayer
-    var video: VideoURL
+    var video: OfflineVideo
+    
+    var offlineVideo: HLSion?
     
     init(videoURL: String, videoName: String) {
-        video = VideoURL(videoName: videoName, videoURL: videoURL)
+        video = OfflineVideo(videoName: videoName, videoURL: videoURL)
         
-        let url = video.getVideoPath()
+        offlineVideo = HLSion(url: URL(string: videoURL)!, name: videoName)
         
-        let player = AVPlayer(url: url)
+        if video.isVideoExist() {
+            print("Video Exist")
+        } else {
+            print("Video does not exist")
+        }
+        
+        let player = AVPlayer(url: URL(string: videoURL)!)
         
         self.player = player
     }
@@ -51,8 +59,6 @@ struct PlayerContainerView: View {
             self.player.pause()
         }
     }
-    
-    
 }
 
 struct PlayerControls: View  {
@@ -76,33 +82,34 @@ struct PlayerControls: View  {
     }
 }
 
-class VideoURL {
+class OfflineVideo {
     var videoName: String
     var videoURL: String
-    var fileManager = FileManager.default
     
+    var offlineVideo: HLSion?
     
     init(videoName: String, videoURL: String) {
         self.videoName = videoName
         self.videoURL = videoURL
         
-        
+        self.offlineVideo = HLSion(url: URL(string: videoURL)!, name: videoName)
     }
     
-    
-    func getVideoPath() -> URL {
-        let documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
-        let destination = documentPath?.appendingPathComponent("\(videoName).mp4")
-        
-        if let path = destination?.path {
-            if fileManager.fileExists(atPath: path) {
-                print("Already exists \(destination)")
-                return destination!
+    //function to check whether the video already exists in the app or not.
+    //this funciton will help play the videos offline.
+    func isVideoExist() -> Bool {
+        if let videoPath = offlineVideo?.localUrl {
+            if videoPath.absoluteString.contains(videoName) {
+                print("already exits")
+                return true
             } else {
-                return URL(string: videoURL)!
+                print("does not exist")
+                return false
             }
+        } else {
+            print("Error")
+            return false
         }
-        return URL(string: videoURL)!
     }
 }
 
@@ -116,22 +123,16 @@ struct DetailedVideoView: View {
     var imageURL = ""
     var videoURL = ""
     
-    var fileManager = FileManager.default
-    
     var downloader: HLSion?
     
     var body: some View {
         VStack {
-            
             ZStack {
                 if !isShowing {
                     ImageView(imageUrl: imageURL)
                         .frame(width: 400, height: 300, alignment: .center)
                         .cornerRadius(10)
                 } else {
-                    /*PlayerView(player: player)
-                     .frame(width: 400, height: 300)
-                     .cornerRadius(10)*/
                     if isShowing {
                         PlayerContainerView(videoURL: self.videoURL, videoName: self.videoName)
                         .frame(width: 400, height: 300)
@@ -177,31 +178,20 @@ struct DetailedVideoView: View {
             }))
     }
     
-    //function to check whether the video already exists in the app or not.
-    //this funciton will help play the videos offline.
-    func isVideoExist(videoName: String) -> Bool {
-        if let videoPath = downloader?.localUrl {
-            if videoPath.absoluteString.contains(videoName) {
-                print("already exits")
-                return true
-            } else {
-                print("does not exist")
-                return false
-            }
-        } else {
-            print("Error")
-            return false
-        }
-    }
-    
+    //function to download the video with the progress bar
     func downloadVideo(videoURL: String, videoName: String) {
+        guard let url = URL(string: videoURL) else {return}
+        //downloader = HLSion(url: url, name: videoName)
+        
         if let videoDownloader = downloader {
             switch videoDownloader.state {
             case .notDownloaded:
                 print("Downloading started")
                 videoDownloader.download { percent in
+                    print("Progress: \(percent)")
                     self.progress = percent/100
                 }.finish { (path) in
+                    print("Finished downloading: \(path)")
                     self.showAlert = true
                 }
             case .downloading:
