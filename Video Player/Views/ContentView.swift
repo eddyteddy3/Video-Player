@@ -16,25 +16,40 @@ struct ContentView: View {
     var namesArray: [Post] = []
     
     var body: some View {
-        NavigationView {
-            List(store.videos) { video in
-                NavigationLink(destination: DetailedVideoView(videoName: video.name, description: video.description, imageURL: video.thumbnail, videoURL: video.video_link)) {
-                    HStack(spacing: 5) {
-                        ImageView(imageUrl: video.thumbnail)
-                            .frame(width: 50, height: 50)
-                            .cornerRadius(5)
-                        Text(video.name)
+        //NavigationView {
+            RefreshableNavigationView(title: "Videos", action: {
+                
+            }) {
+                /*List(self.store.videos) { video in
+                    NavigationLink(destination: DetailedVideoView(videoName: video.name, description: video.description, imageURL: video.thumbnail, videoURL: video.video_link)) {
+                        HStack(spacing: 5) {
+                            ImageView(imageUrl: video.thumbnail)
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(5)
+                            Text(video.name)
+                        }
+                    }
+                }*/
+                ForEach(self.store.videos) { (video) in
+                    NavigationLink(destination: DetailedVideoView(videoName: video.name, description: video.description, imageURL: video.thumbnail, videoURL: video.video_link)) {
+                        HStack(spacing: 5) {
+                            ImageView(imageUrl: video.thumbnail)
+                                .frame(width: 50, height: 50)
+                                .cornerRadius(5)
+                            Text(video.name)
+                        }
                     }
                 }
-            }
-        .navigationBarTitle("Videos")
+                }.navigationBarItems(trailing: Text("HELLP"))
+            
+            //...navigationBarTitle("Videos")
             .navigationBarItems(trailing: Button("Load Items"){
                 for names in self.store.videos {
                     let post = self.store.loadListFromCache(videoName: names.name)
                      print(post)
                 }
             })
-        }
+        
     }
     
     func fillArray() {
