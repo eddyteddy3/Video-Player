@@ -53,18 +53,6 @@ final internal class SessionManager: NSObject, AVAssetDownloadDelegate {
         task.resume()
     }
     
-//    func downloadAdditional(media: AVMutableMediaSelection, hlsion: HLSion) {
-//        guard assetExists(forName: hlsion.name) == true else { return }
-//        
-//        let options = [AVAssetDownloadTaskMediaSelectionKey: media]
-//        guard let task = session.makeAssetDownloadTask(asset: hlsion.urlAsset, assetTitle: hlsion.name, assetArtworkData: nil, options: options) else { return }
-//        
-//        task.taskDescription = hlsion.name
-//        downloadingMap[task] = hlsion
-//        
-//        task.resume()
-//    }
-    
     func cancelDownload(_ hlsion: HLSion) {
         downloadingMap.first(where: { $1 == hlsion })?.key.cancel()
     }

@@ -37,6 +37,28 @@ class DataStore: ObservableObject {
         let post = (postCache.get(forKey: videoName))
         return post
     }
+    
+    func loadMore() {
+        var couter = 1
+        
+        ApiCall.init().getData { (videos) in
+            print(videos.count)
+            print(self.videos.count)
+            for video in videos {
+                couter = 1
+                for post in self.videos {
+                    if post.name != video.name && couter > 14 {
+                        print("not Found")
+                        print(post)
+                        return
+                    } else {
+                        print("found \(couter)")
+                        couter += 1
+                    }
+                }
+            }
+        }
+    }
 }
 
 

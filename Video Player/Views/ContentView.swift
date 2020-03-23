@@ -18,7 +18,7 @@ struct ContentView: View {
     var body: some View {
         //NavigationView {
             RefreshableNavigationView(title: "Videos", action: {
-                
+                self.store.loadMore()
             }) {
                 /*List(self.store.videos) { video in
                     NavigationLink(destination: DetailedVideoView(videoName: video.name, description: video.description, imageURL: video.thumbnail, videoURL: video.video_link)) {
