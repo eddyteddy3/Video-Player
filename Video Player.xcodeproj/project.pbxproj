@@ -24,9 +24,8 @@
 		033CAA242428427D00FD0D18 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA202428427C00FD0D18 /* SessionManager.swift */; };
 		033CAA252428427D00FD0D18 /* HLSion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA212428427C00FD0D18 /* HLSion.swift */; };
 		033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA272428CEC100FD0D18 /* ProgressView.swift */; };
+		03BA21AC242A272D00F38CF3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BA21AB242A272D00F38CF3 /* PlayerView.swift */; };
 		03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 03D724E7242935FA0092076B /* SwiftUIPullToRefresh */; };
-		03D724EB242951EA0092076B /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 03D724EA242951EA0092076B /* ViewInspector */; };
-		03D724EF242952AE0092076B /* Unit Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D724EE242952AE0092076B /* Unit Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +49,7 @@
 		033CAA212428427C00FD0D18 /* HLSion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HLSion.swift; sourceTree = "<group>"; };
 		033CAA222428427D00FD0D18 /* HLSion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSion.h; sourceTree = "<group>"; };
 		033CAA272428CEC100FD0D18 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		03D724EE242952AE0092076B /* Unit Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Unit Test.swift"; sourceTree = "<group>"; };
+		03BA21AB242A272D00F38CF3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +58,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */,
-				03D724EB242951EA0092076B /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +107,7 @@
 			children = (
 				033CA9892423F69D00FD0D18 /* ContentView.swift */,
 				033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */,
+				03BA21AB242A272D00F38CF3 /* PlayerView.swift */,
 				033CA9B524260CA800FD0D18 /* ImageView.swift */,
 				033CA99D2423F8E100FD0D18 /* Assets */,
 				033CAA272428CEC100FD0D18 /* ProgressView.swift */,
@@ -149,7 +148,6 @@
 				033CAA1E2428425C00FD0D18 /* HLSion Downloader */,
 				033CA9A32423FA5100FD0D18 /* APICall.swift */,
 				033CA9B9242772E800FD0D18 /* Extensions.swift */,
-				03D724EE242952AE0092076B /* Unit Test.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -183,7 +181,6 @@
 			name = "Video Player";
 			packageProductDependencies = (
 				03D724E7242935FA0092076B /* SwiftUIPullToRefresh */,
-				03D724EA242951EA0092076B /* ViewInspector */,
 			);
 			productName = "Video Player";
 			productReference = 033CA9822423F69D00FD0D18 /* Video Player.app */;
@@ -247,13 +244,13 @@
 				033CA9B624260CA800FD0D18 /* ImageView.swift in Sources */,
 				033CA9B22424FC3900FD0D18 /* DetailedVideoView.swift in Sources */,
 				033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */,
+				03BA21AC242A272D00F38CF3 /* PlayerView.swift in Sources */,
 				033CA9862423F69D00FD0D18 /* AppDelegate.swift in Sources */,
 				033CAA252428427D00FD0D18 /* HLSion.swift in Sources */,
 				033CA9A624241D9A00FD0D18 /* DataStore.swift in Sources */,
 				033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */,
 				033CA9A12423F94300FD0D18 /* DataModel.swift in Sources */,
 				033CA9BA242772E800FD0D18 /* Extensions.swift in Sources */,
-				03D724EF242952AE0092076B /* Unit Test.swift in Sources */,
 				033CAA232428427D00FD0D18 /* AssetStore.swift in Sources */,
 				033CA9A42423FA5100FD0D18 /* APICall.swift in Sources */,
 				033CA9882423F69D00FD0D18 /* SceneDelegate.swift in Sources */,
@@ -477,11 +474,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 03D724E6242935FA0092076B /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */;
 			productName = SwiftUIPullToRefresh;
-		};
-		03D724EA242951EA0092076B /* ViewInspector */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 03D724E9242951EA0092076B /* XCRemoteSwiftPackageReference "ViewInspector" */;
-			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
