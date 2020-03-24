@@ -9,7 +9,6 @@
 import Foundation
 
 class ApiCall {
-    
     var postCache = VideoListCache.getListCache()
     
     func getData(completion: @escaping ([Post]) -> ()) {

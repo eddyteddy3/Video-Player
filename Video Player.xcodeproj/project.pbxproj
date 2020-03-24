@@ -25,6 +25,7 @@
 		033CAA252428427D00FD0D18 /* HLSion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA212428427C00FD0D18 /* HLSion.swift */; };
 		033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033CAA272428CEC100FD0D18 /* ProgressView.swift */; };
 		03BA21AC242A272D00F38CF3 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BA21AB242A272D00F38CF3 /* PlayerView.swift */; };
+		03BA21AE242A2D9A00F38CF3 /* Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BA21AD242A2D9A00F38CF3 /* Caching.swift */; };
 		03D724E8242935FA0092076B /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 03D724E7242935FA0092076B /* SwiftUIPullToRefresh */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		033CAA222428427D00FD0D18 /* HLSion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSion.h; sourceTree = "<group>"; };
 		033CAA272428CEC100FD0D18 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		03BA21AB242A272D00F38CF3 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		03BA21AD242A2D9A00F38CF3 /* Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caching.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +111,8 @@
 				033CA9B12424FC3900FD0D18 /* DetailedVideoView.swift */,
 				03BA21AB242A272D00F38CF3 /* PlayerView.swift */,
 				033CA9B524260CA800FD0D18 /* ImageView.swift */,
-				033CA99D2423F8E100FD0D18 /* Assets */,
 				033CAA272428CEC100FD0D18 /* ProgressView.swift */,
+				033CA99D2423F8E100FD0D18 /* Assets */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -148,6 +150,7 @@
 				033CAA1E2428425C00FD0D18 /* HLSion Downloader */,
 				033CA9A32423FA5100FD0D18 /* APICall.swift */,
 				033CA9B9242772E800FD0D18 /* Extensions.swift */,
+				03BA21AD242A2D9A00F38CF3 /* Caching.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				033CAA282428CEC100FD0D18 /* ProgressView.swift in Sources */,
 				03BA21AC242A272D00F38CF3 /* PlayerView.swift in Sources */,
 				033CA9862423F69D00FD0D18 /* AppDelegate.swift in Sources */,
+				03BA21AE242A2D9A00F38CF3 /* Caching.swift in Sources */,
 				033CAA252428427D00FD0D18 /* HLSion.swift in Sources */,
 				033CA9A624241D9A00FD0D18 /* DataStore.swift in Sources */,
 				033CA9B424260B3700FD0D18 /* ImageModel.swift in Sources */,

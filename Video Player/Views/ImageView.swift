@@ -8,9 +8,10 @@
 
 import SwiftUI
 
+//a view to handle image loading from the web or from cache
 struct ImageView: View {
     @ObservedObject var image: ImageLoader
-    static var placeholderImage = UIImage.init(systemName: "exclamationmark.icloud.fill")
+    static var placeholderImage = UIImage.init(systemName: "exclamationmark.icloud.fill") //this is default image if the image is not loaded
     
     init(imageUrl: String) {
         image = ImageLoader(url: imageUrl)

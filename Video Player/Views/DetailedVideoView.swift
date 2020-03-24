@@ -9,7 +9,6 @@
 import SwiftUI
 import AVKit
 
-
 struct DetailedVideoView: View {
     @State var videoName = ""
     @State var description = ""
@@ -90,7 +89,6 @@ struct DetailedVideoView: View {
     
     //function to download the video with the progress bar
     func downloadVideo(downloader: HLSion) {
-        
         switch downloader.state {
         case .notDownloaded:
             print("Downloading started")

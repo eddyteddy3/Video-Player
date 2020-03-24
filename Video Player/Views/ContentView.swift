@@ -49,16 +49,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-
-class VideoListCache {
-    var cache = NSCache<NSString, AnyObject>()
-    
-    func get(forKey: String) -> Post? {
-        return cache.object(forKey: NSString(string: forKey)) as? Post
-    }
-    
-    func set(forKey: String, post: Post) {
-        cache.setObject(post as AnyObject, forKey: NSString(string: forKey))
-    }
-}

@@ -9,6 +9,7 @@
 import SwiftUI
 import Combine
 
+//class to load the list and save in a array and return back to ContentView
 class DataStore: ObservableObject {
     @Published var videos: [Post] = []
     
@@ -38,6 +39,7 @@ class DataStore: ObservableObject {
         return post
     }
     
+    //function to load more objects upon refreshing
     func loadMore() {
         var couter = 1
         
@@ -47,7 +49,7 @@ class DataStore: ObservableObject {
             for video in videos {
                 couter = 1
                 for post in self.videos {
-                    if post.name != video.name && couter > 14 {
+                    if post.name != video.name && couter > 14 { //condition to not to let add duplicate items
                         print("not Found")
                         print(post)
                         return
@@ -58,18 +60,5 @@ class DataStore: ObservableObject {
                 }
             }
         }
-    }
-}
-
-
-class DataModel: ObservableObject {
-    @Published var posts: [Post]
-    
-    init(posts: [Post]) {
-        self.posts = posts
-    }
-    
-    func addElements() {
-        //posts.append(Post(name: <#T##String#>, description: <#T##String#>, thumbnail: <#T##String#>, video_link: <#T##String#>))
     }
 }

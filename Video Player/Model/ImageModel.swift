@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class ImageLoader: ObservableObject {
-    @Published var image: UIImage?
+    @Published var image: UIImage? //will allow to get the image and pass it to observedObject
     
     var imageURL: String?
     var imageCache = ImageCache.getImageCache()
@@ -21,11 +21,13 @@ class ImageLoader: ObservableObject {
     }
     
     func loadImage() {
+        //if there is picture in cache then it will be loaded from that
         if loadImageFromCache() {
             print("loading from cache")
             return
         }
         
+        //else it will be loaded from url
         guard let url = URL(string: imageURL!) else { return }
         URLSession.shared.dataTask(with: url) { (data, _, _) in
             if let data = data {
@@ -40,6 +42,7 @@ class ImageLoader: ObservableObject {
         }.resume()
     }
     
+    //func to load from cache
     func loadImageFromCache() -> Bool {
         guard let url = imageURL else {
             return false
@@ -54,16 +57,6 @@ class ImageLoader: ObservableObject {
     }
 }
 
-class ImageCache {
-    var cache = NSCache<NSString, UIImage>()
-    
-    func get(forKey: String) -> UIImage? {
-        return cache.object(forKey: NSString(string: forKey))
-    }
-    
-    func set(forkey: String, image: UIImage) {
-        cache.setObject(image, forKey: NSString(string: forkey))
-    }
-}
+
 
 
