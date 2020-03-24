@@ -78,7 +78,7 @@ struct DetailedVideoView: View {
                         Button("Cancel") {
                             downloader.download().cancelDownload()
                             self.inProgress = false
-                            self.progress = 0.0
+                            //self.progress = 0.0
                         }
                         
                         ProgressView(progress: $progress)

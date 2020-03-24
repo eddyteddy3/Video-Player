@@ -24,9 +24,10 @@ struct ProgressView: View {
                     .frame(width: 30, height: 30)
                  
                 Circle() //this is inner cirlce
-                    .stroke(Color.black.opacity(0.1), style: StrokeStyle(lineWidth: 5))
+                    .stroke(Color(UIColor.systemGray).opacity(0.3), style: StrokeStyle(lineWidth: 5))
                     .frame(width: 30, height: 30)
-            }
+                    .environment(\.colorScheme, .dark)
+            }.padding()
         }
     }
 }
